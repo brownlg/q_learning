@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arduino Manager</title>
+    <script>
+        var ws = new WebSocket('ws://10.0.0.8:8765');
+
+        ws.onmessage = function(event) {
+            console.log("Message rec'd")
+            var response = event.data;
+            document.getElementById('response').innerHTML = response;
+        };
+
+        function sendMessageOn() {
+            console.log("send message")            
+            ws.send("ON");             
+        }
+
+        function sendMessageOff() {
+            console.log("send message")            
+            ws.send("OFF");                            
+        }
+
+
+    </script>
+</head>
+<body>
+    <h1>Arduino Manager</h1>
+    <p>Click the button to send a message to a WebSocket.</p>
+    <button onclick="sendMessageOn()">Turn on light</button>
+    <button onclick="sendMessageOff()">Turn OFF light</button>
+    <p id="response"></p>
+</body>
+</html>
